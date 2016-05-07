@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:jms="http://www.springframework.org/schema/jms"
+        xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms.xsd">
+            
+    <!-- Property Configurer  -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>file:${CONFIG_DIR}/filter.properties</value>
+				<value>WEB-INF/classes/log4j.properties</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="jndiTemplate" class="org.springframework.jndi.JndiTemplate">
+		<property name="environment">
+			<props>
+				<prop key="java.naming.factory.initial">com.sonicsw.jndi.mfcontext.MFContextFactory</prop>
+				<prop key="java.naming.provider.url">${SONIC_PROVIDER_URLS}</prop>
+				<prop key="com.sonicsw.jndi.mfcontext.domain">${SONIC_CONTEXT_DOMAIN}</prop>
+				<prop key="com.sonicsw.jndi.mfcontext.idleTimeout">5000</prop>
+				<prop key="java.naming.security.principal">${SONIC_USERNAME}</prop>
+				<prop key="java.naming.security.credentials">${SONIC_PASSWORD}</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="topicConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiTemplate" ref="jndiTemplate"/>
+		<property name="jndiName" value="ESB_RT_TopicConnectionFactory"/>
+	</bean>
+ 
+    <bean id="queueConnectionFactory" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiTemplate" ref="jndiTemplate"/>
+        <property name="jndiName" value="ESB_RT_QueueConnectionFactory"/>
+    </bean>
+ 
+    <bean id="userCredentialsQueueConnectionFactory" class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter">
+        <property name="targetConnectionFactory" ref="queueConnectionFactory" />
+        <property name="username" value="${SONIC_USERNAME}"/>
+        <property name="password" value="${SONIC_PASSWORD}"/>
+    </bean>
+ 
+ 	<bean id="userCredentialsTopicConnectionFactory" class="org.springframework.jms.connection.UserCredentialsConnectionFactoryAdapter">
+        <property name="targetConnectionFactory" ref="topicConnectionFactory" />
+       	<property name="username" value="${SONIC_USERNAME}"/>
+        <property name="password" value="${SONIC_PASSWORD}"/>
+    </bean>
+ 
+    <bean id="singleTopicConnectionFactory" class="org.springframework.jms.connection.SingleConnectionFactory"> 
+        <property name="targetConnectionFactory" ref="userCredentialsTopicConnectionFactory"/>
+		<property name="reconnectOnException" value="true"/>		
+    </bean>
+    
+    <!-- Message Handling is Here -->
+    <bean id="topicProcessor" class="com.sample.jms.topic.JMSMessageListener" init-method="init">
+    </bean>
+	
+
+    <bean id="topicContainer" class="com.sample.jms.topic.TopicMessageListenerContainer">
+	    <property name="connectionFactory" ref="singleTopicConnectionFactory"/>
+		<!--prepend [[CLUSTER_NAME]] to allow topic works like queue -->
+	    <property name="destinationName" value="[[CLUSTERED_APP_NAME]]${SONIC_JNDI_NAME}"/>
+	    <!-- Message Handling is Here -->
+	    <property name="messageListener" ref="topicProcessor"/>
+	    <property name="sessionTransacted" value="true"/>
+        <property name="pubSubDomain" value="true"/>  
+		<!-- only set subscriptionDurable = true in production environment-->
+        <property name="subscriptionDurable" value="false"/>
+        <property name="concurrentConsumers" value="1"/>
+        <property name="maxConcurrentConsumers" value="1"/>      
+        <property name="durableSubscriptionName" value="SUBSCRIPTION_NAME"/>           
+	</bean>	
+	         
+</beans>
