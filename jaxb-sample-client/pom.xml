@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.rafanan.testjaxb</groupId>
+	<artifactId>jaxb-sample-client</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<description>Generate Jax-B bindings</description>
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<configuration>
+						<source>1.6</source>
+						<target>1.6</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.12.4</version>
+			</plugin>
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<arguments>-Xcollection-setter-injector</arguments>
+					<clearOutputDir>false</clearOutputDir>
+					<schemaDirectory>src/main/resources/schema</schemaDirectory>
+					<forceRegenerate>true</forceRegenerate>
+					<serverSide>true</serverSide>
+					<subPackageByFileName>false</subPackageByFileName>
+					<verbose>false</verbose>
+					<debug>false</debug>
+					<noImports>false</noImports>
+					<allElements>true</allElements>
+					<outputDirectory>${project.build.directory}/generated-sources/jaxb</outputDirectory>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>com.sun.tools.xjc</groupId>
+						<artifactId>collection-setter-injector</artifactId>
+						<version>1.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.4</version>
+		</dependency>
+
+	</dependencies>
+</project>

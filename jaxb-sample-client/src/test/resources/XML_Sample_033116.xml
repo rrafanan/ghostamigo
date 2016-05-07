@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Document created with online XML Editor http://xmlgrid.net 2013/10/23 8:33:18  -->
+<lvb_system>
+     <line null="test attribute">
+           <code>test string</code>
+           <type>test string</type>
+           <start_time_operation>test string</start_time_operation>
+           <end_time_operation>test string</end_time_operation>
+           <count_vehicles>test string</count_vehicles>
+           <map>test string</map>
+           <start_station>
+                 <name>test string</name>
+           </start_station>
+           <end_station>
+                 <name>test string</name>
+           </end_station>
+           <intermediate_stations>
+                 <name>test string</name>
+           </intermediate_stations>
+           <vehicles_line null="test attribute">
+                 <name>test string</name>
+                 <capacity>9</capacity>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+           </vehicles_line>
+     </line>
+     <line null="test attribute">
+           <code>test string</code>
+           <type>test string</type>
+           <start_time_operation>test string</start_time_operation>
+           <end_time_operation>test string</end_time_operation>
+           <count_vehicles>test string</count_vehicles>
+           <map>test string</map>
+           <start_station>
+                 <name>test string</name>
+           </start_station>
+           <end_station>
+                 <name>test string</name>
+           </end_station>
+           <intermediate_stations>
+                 <name>test string</name>
+           </intermediate_stations>
+           <vehicles_line null="test attribute">
+                 <name>test string</name>
+                 <capacity>9</capacity>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+           </vehicles_line>
+     </line>
+     <line null="test attribute">
+           <code>test string</code>
+           <type>test string</type>
+           <start_time_operation>test string</start_time_operation>
+           <end_time_operation>test string</end_time_operation>
+           <count_vehicles>test string</count_vehicles>
+           <map>test string</map>
+           <start_station>
+                 <name>test string</name>
+           </start_station>
+           <end_station>
+                 <name>test string</name>
+           </end_station>
+           <intermediate_stations>
+                 <name>test string</name>
+           </intermediate_stations>
+           <vehicles_line null="test attribute">
+                 <name>test string</name>
+                 <capacity>9</capacity>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+                 <driver>
+                       <name>test string</name>
+                       <birth_date>2011-01-15</birth_date>
+                       <email>test string</email>
+                       <phone>test string</phone>
+                       <avatar>test string</avatar>
+                 </driver>
+           </vehicles_line>
+     </line>
+</lvb_system>
